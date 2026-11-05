@@ -1,4 +1,8 @@
 # Databricks notebook source
+# /// script
+# [tool.databricks.environment]
+# environment_version = "6"
+# ///
 # MAGIC %md
 # MAGIC # Silver: typed, cleaned, deduplicated tables
 
@@ -10,6 +14,7 @@ spark.sql("USE CATALOG workspace")
 spark.sql("USE SCHEMA insurance")
 
 # COMMAND ----------
+
 # MAGIC %md ## customers
 
 # COMMAND ----------
@@ -29,6 +34,7 @@ customers = (
 customers.write.mode("overwrite").saveAsTable("silver_customers")
 
 # COMMAND ----------
+
 # MAGIC %md ## policies
 
 # COMMAND ----------
@@ -48,6 +54,7 @@ policies = (
 policies.write.mode("overwrite").saveAsTable("silver_policies")
 
 # COMMAND ----------
+
 # MAGIC %md ## claims
 # MAGIC - duplicate claim_id: keep the latest ingested row
 # MAGIC - claim_amount: try_cast, bad values ("n/a", "unknown", "-") become NULL and are flagged
@@ -77,6 +84,7 @@ claims = (
 claims.write.mode("overwrite").saveAsTable("silver_claims")
 
 # COMMAND ----------
+
 # MAGIC %md ## Checks
 
 # COMMAND ----------

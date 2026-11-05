@@ -1,4 +1,8 @@
 # Databricks notebook source
+# /// script
+# [tool.databricks.environment]
+# environment_version = "6"
+# ///
 # MAGIC %md
 # MAGIC # Bronze: raw CSV -> Delta (Auto Loader)
 # MAGIC Source: /Volumes/workspace/insurance/raw/{customers,policies,claims}
@@ -48,6 +52,7 @@ for n in ["customers", "policies", "claims"]:
     print(n, spark.table(f"bronze_{n}").count())
 
 # COMMAND ----------
+
 # MAGIC %md
 # MAGIC ## Full reload
 # MAGIC If you delete or change files and want a clean reload, drop the table AND delete its checkpoint folder:
