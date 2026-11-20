@@ -4,12 +4,61 @@ models:
   - name: stg_claims
     columns:
       - name: claim_id
-        tests:
+        data_tests:
           - unique
           - not_null
-  - name: claims_by_policy
+  - name: stg_policies
     columns:
       - name: policy_id
-        tests:
+        data_tests:
+          - unique
+          - not_null
+  - name: stg_customers
+    columns:
+      - name: customer_id
+        data_tests:
+          - unique
+          - not_null
+  - name: dim_customer
+    columns:
+      - name: customer_id
+        data_tests:
+          - unique
+          - not_null
+  - name: dim_policy
+    columns:
+      - name: policy_id
+        data_tests:
+          - unique
+          - not_null
+      - name: customer_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_customer')
+                field: customer_id
+  - name: fct_claims
+    columns:
+      - name: claim_id
+        data_tests:
+          - unique
+          - not_null
+      - name: policy_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_policy')
+                field: policy_id
+      - name: status
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['open', 'paid', 'rejected']
+  - name: agg_claims_by_policy
+    columns:
+      - name: policy_id
+        data_tests:
           - unique
           - not_null

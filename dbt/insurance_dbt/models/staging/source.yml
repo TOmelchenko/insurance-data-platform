@@ -6,3 +6,5 @@ sources:
     schema: insurance
     tables:
       - name: silver_claims
+      - name: silver_policies
+      - name: silver_customers
