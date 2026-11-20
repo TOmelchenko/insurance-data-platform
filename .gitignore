@@ -1,0 +1,14 @@
+# Python
+.venv/
+__pycache__/
+
+# Local data: synthetic CSVs, uploaded to the Databricks volume by hand
+data/
+
+# dbt
+target/
+dbt_packages/
+logs/
+
+# Secrets
+.env
