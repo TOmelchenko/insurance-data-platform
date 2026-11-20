@@ -5,6 +5,6 @@ sources:
     database: workspace
     schema: insurance
     tables:
-      - name: silver_claims
-      - name: silver_policies
-      - name: silver_customers
+      - name: bronze_claims
+      - name: bronze_policies
+      - name: bronze_customers

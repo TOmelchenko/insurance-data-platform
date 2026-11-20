@@ -1,10 +1,6 @@
 # Databricks notebook source
-# /// script
-# [tool.databricks.environment]
-# environment_version = "6"
-# ///
 # MAGIC %md
-# MAGIC # Reset: remove bronze and silver data for a full test run
+# MAGIC # Reset: remove bronze data for a full test run
 # MAGIC Drops the tables AND deletes the Auto Loader checkpoints. Both are required:
 # MAGIC - only tables dropped: Auto Loader thinks files are processed, tables stay empty
 # MAGIC - only checkpoints deleted: files are loaded again, duplicates in bronze
@@ -20,10 +16,8 @@ BASE = f"/Volumes/{CATALOG}/{SCHEMA}/raw"
 
 # COMMAND ----------
 
-tables = [
-    "bronze_customers", "bronze_policies", "bronze_claims",
-    "silver_customers", "silver_policies", "silver_claims",
-]
+tables = ["bronze_customers", "bronze_policies", "bronze_claims"]
+# dbt tables (stg_*, fct_*, dim_*, agg_*) are rebuilt by `dbt build`, no reset needed
 for t in tables:
     spark.sql(f"DROP TABLE IF EXISTS {CATALOG}.{SCHEMA}.{t}")
     print("dropped", t)
