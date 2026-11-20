@@ -1,0 +1,15 @@
+version: 2
+
+models:
+  - name: stg_claims
+    columns:
+      - name: claim_id
+        tests:
+          - unique
+          - not_null
+  - name: claims_by_policy
+    columns:
+      - name: policy_id
+        tests:
+          - unique
+          - not_null

@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: insurance
+    database: workspace
+    schema: insurance
+    tables:
+      - name: silver_claims
